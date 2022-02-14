@@ -9,9 +9,9 @@ const userSchema = new mongoose.Schema({
     description : String,
     role: {type: mongoose.Schema.ObjectId, ref: "roles"},
     registerDate : {type: Date, default: Date.now},
-    dbStatus: true,
+    dbStatus: Boolean,
 });
 
-const user = mongoose.model("users", userSchema); //esquema se garda en coleccion de mongodb
+const user = mongoose.model("users", userSchema);
 
 export default user;

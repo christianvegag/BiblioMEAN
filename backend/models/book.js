@@ -13,7 +13,7 @@ const bookSchema = new mongoose.Schema({
     priceBook : Number,
     statusLeasing : Boolean,
     registerDate : {type: Date, default: Date.now},
-    dbStatus: true,
+    dbStatus: Boolean,
 });
 
 const book = mongoose.model("books", bookSchema); //esquema se garda en coleccion de mongodb

@@ -4,9 +4,9 @@ const rolesSchema = new mongoose.Schema({
   name: String,
   description: String,
   registerDate: { type: Date, default: Date.now },
-  dbStatus: true,
+  dbStatus: Boolean,
 });
 
-const role = mongoose.model("roles", rolesSchema); //esquema se garda en coleccion de mongodb
+const role = mongoose.model("roles", rolesSchema);
 
 export default role;
