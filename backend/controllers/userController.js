@@ -62,6 +62,34 @@ const listUser = async (req, res) => {
   return res.status(200).send({ users });
 };
 
+const login = async (req, res) => {
+  const userLogin = await user.findOne({ email: req.body.email });
+  if (!userLogin)
+    return res.status(400).send({ message: "Wrong email or password" });
+
+  if (!userLogin.dbStatus)
+    return res.status(400).send({ message: "User no found" });
+
+  const passHash = await bcrypt.compare(req.body.password, userLogin.password);
+  if (!passHash)
+    return res.status(400).send({ message: "Wrong email or password" });
+
+    try {
+      return res.status(200).json({
+        token: jwt.sign(
+          {
+            _id: userLogin.id,
+            name: userLogin.name,
+            role: userLogin.role,
+            iat: moment().unix(),
+          },
+          process.env.SK_JWT
+        ),
+      });
+    } catch (e) {
+      return res.status(500).send({ message: "Login error" });
+    }
+};
 
 
-export default { registerUser, listUser };
+export default { registerUser, listUser , login};
