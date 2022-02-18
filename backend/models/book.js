@@ -8,10 +8,11 @@ const bookSchema = new mongoose.Schema({
     languajeBook : String,
     pagesBook : Number,
     editorial : String,
-    Category : String,
+    category : String,
     priceLeasing : Number,
     priceBook : Number,
     statusLeasing : Boolean,
+    user: {type: mongoose.Schema.ObjectId, ref: "users"},
     registerDate : {type: Date, default: Date.now},
     dbStatus: Boolean,
 });
