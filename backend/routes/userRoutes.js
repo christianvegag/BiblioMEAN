@@ -12,6 +12,9 @@ router.post(
   );
   
   router.get("/listUser/:name?", userController.listUser);
-  router.post("/login", userController.login)
+  router.get("/listUserAdmin/:name?", userController.listUserAdmin);
+  router.post("/login", userController.login);
+  router.put("/delete/:_id", userController.deleteUser);
+  router.put("/updateUser",userValidate.status ,userController.updateUser);
 
 export default router;

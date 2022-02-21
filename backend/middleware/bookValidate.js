@@ -1,4 +1,5 @@
 import book from "../models/book.js";
+import user from "../models/user.js";
 
 
 const existingDateBook = async (req, res, next) => {
@@ -14,4 +15,24 @@ const existingDateBook = async (req, res, next) => {
       next();
 };
 
-export default {existingDateBook}
+const existingUserBook = async (req, res, next) => {
+  const userId = await user.findOne({ name: req.body.user });
+  if (!userId) return res.status(500).send({ message: "User not found" });
+
+  req.body.user = userId._id
+
+  next ();
+};
+
+const status = async (req, res, next) => {
+
+  const status = await book.findOne({ _id: req.body._id });
+
+  if (status.dbStatus == false)
+    return res.status(500).send({ message: "Book not found" });
+
+    next();
+};
+
+
+export default {existingDateBook, existingUserBook, status}

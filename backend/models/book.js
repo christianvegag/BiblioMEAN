@@ -14,6 +14,7 @@ const bookSchema = new mongoose.Schema({
     statusLeasing : Boolean,
     user: {type: mongoose.Schema.ObjectId, ref: "users"},
     registerDate : {type: Date, default: Date.now},
+    modifyDate: { type: Date, default: Date.now },
     dbStatus: Boolean,
 });
 

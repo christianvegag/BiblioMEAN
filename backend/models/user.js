@@ -9,6 +9,7 @@ const userSchema = new mongoose.Schema({
     description : String,
     role: {type: mongoose.Schema.ObjectId, ref: "roles"},
     registerDate : {type: Date, default: Date.now},
+    modifyDate: { type: Date, default: Date.now },
     dbStatus: Boolean,
 });
 

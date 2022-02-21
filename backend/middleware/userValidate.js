@@ -10,7 +10,17 @@ const existingUser = async (req, res, next) => {
     if (existingEmail)
       return res.status(500).send({ message: "The user is already registered" });
 
-      next(); 
+      next();
 };
 
-export default {existingUser}
+const status = async (req, res, next) => {
+
+  const status = await user.findOne({ email: req.body.email });
+
+  if (status.dbStatus == false)
+    return res.status(500).send({ message: "User not found" });
+
+    next();
+};
+
+export default {existingUser, status}
