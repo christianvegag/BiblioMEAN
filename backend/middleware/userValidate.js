@@ -15,7 +15,7 @@ const existingUser = async (req, res, next) => {
 
 const status = async (req, res, next) => {
 
-  const status = await user.findOne({ email: req.body.email });
+  const status = await user.findOne({ _id: req.body._id });
 
   if (status.dbStatus == false)
     return res.status(500).send({ message: "User not found" });
