@@ -18,16 +18,14 @@ export class UserService {
     return this._http.post<any>(this.env + 'user/login', user);
   }
   loggedIn() {
-    //devuelve true o false
-    return !!localStorage.getItem('token'); //true o false
+    return !!localStorage.getItem('token');
   }
 
   getToken() {
-    // devuelve el token
     return localStorage.getItem('token');
   }
 
   logout() {
-    return localStorage.removeItem('token');
+    localStorage.removeItem('token');
   }
 }

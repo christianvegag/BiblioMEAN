@@ -9,22 +9,29 @@ import { LoginComponent } from './home/login/login.component';
 import { HeaderComponent } from './home/header/header.component';
 import { FooterComponent } from './home/footer/footer.component';
 import { UserService } from './services/user.service';
+import { TokenInterceptorService } from './services/token-interceptor.service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatTableModule} from '@angular/material/table';
+import { MatTableModule } from '@angular/material/table';
 import { AuthGuard } from './guard/auth.guard';
 
-
 @NgModule({
-  declarations: [AppComponent, RegisterComponent, ListTaskComponent, LoginComponent, HeaderComponent, FooterComponent],
+  declarations: [
+    AppComponent,
+    RegisterComponent,
+    ListTaskComponent,
+    LoginComponent,
+    HeaderComponent,
+    FooterComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -38,9 +45,17 @@ import { AuthGuard } from './guard/auth.guard';
     MatCardModule,
     MatInputModule,
     MatSnackBarModule,
-    MatTableModule
+    MatTableModule,
   ],
-  providers: [UserService, AuthGuard],
+  providers: [
+    UserService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
