@@ -20,6 +20,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatTableModule} from '@angular/material/table';
+import { AuthGuard } from './guard/auth.guard';
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import {MatTableModule} from '@angular/material/table';
     MatSnackBarModule,
     MatTableModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
